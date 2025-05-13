@@ -141,7 +141,7 @@ namespace MagicVilla_VillaAPI.Controllers
 
             try
             {
-                _dbVilla.UpdateAsync(model);
+                await _dbVilla.UpdateAsync(model);
             }
             catch (DbUpdateConcurrencyException ex)
             {
@@ -187,7 +187,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            _dbVilla.UpdateAsync(model);
+            await _dbVilla.UpdateAsync(model);
 
             _logger.LogInformation("Successfully partially updating villa with Id = " + id);
             return CreatedAtRoute("GetVilla", new { id = id }, model);
