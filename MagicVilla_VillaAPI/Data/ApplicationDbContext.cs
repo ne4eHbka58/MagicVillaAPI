@@ -85,18 +85,21 @@ namespace MagicVilla_VillaAPI.Data
                 new VillaNumber()
                 {
                     VillaNo = 501,
+                    VillaID = 5,
                     SpecialDetails = "Room with facilities for the disabled",
                     CreatedDate = DateTime.Now,
                 },
                 new VillaNumber()
                 {
                     VillaNo = 502,
+                    VillaID = 5,
                     SpecialDetails = "Big room",
                     CreatedDate = DateTime.Now,
                 },
                 new VillaNumber()
                 {
                     VillaNo = 503,
+                    VillaID = 5,
                     SpecialDetails = "Big bath",
                     CreatedDate = DateTime.Now,
                 }

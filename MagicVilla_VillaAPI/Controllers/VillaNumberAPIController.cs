@@ -21,11 +21,13 @@ namespace MagicVilla_VillaAPI.Controllers
         protected APIResponse _response;
         private readonly ILogger<VillaNumberAPIController> _logger;
         private readonly IVillaNumberRepository _dbVillaNumber;
+        private readonly IVillaRepository _dbVilla;
         private readonly IMapper _mapper;
-        public VillaNumberAPIController(ILogger<VillaNumberAPIController> logger, IVillaNumberRepository dbVillaNumber, IMapper mapper)
+        public VillaNumberAPIController(ILogger<VillaNumberAPIController> logger, IVillaNumberRepository dbVillaNumber, IVillaRepository dbVilla, IMapper mapper)
         {
             _logger = logger;
             _dbVillaNumber = dbVillaNumber;
+            _dbVilla = dbVilla;
             _mapper = mapper;
             this._response = new();  
         }
@@ -107,9 +109,18 @@ namespace MagicVilla_VillaAPI.Controllers
             {
 
                 if (await _dbVillaNumber.GetAsync(u => u.VillaNo == createDTO.VillaNo) != null)
-                {
+                { 
                     _logger.LogError("Create Villa number Error (Villa number has already existing no)");
                     _response.ErrorMessages = new List<string> { "Villa number already Exists!" };
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    return BadRequest(_response);
+                }
+
+                if (await _dbVillaNumber.GetAsync(u => u.VillaID == createDTO.VillaID) == null)
+                {
+                    _logger.LogError("Create Villa number Error (Villa number has invalid foreign key)");
+                    _response.ErrorMessages = new List<string> { "Villa number has invalid foreign key" };
                     _response.IsSuccess = false;
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
@@ -208,6 +219,15 @@ namespace MagicVilla_VillaAPI.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.IsSuccess = false;
                     _response.ErrorMessages = new List<string> { "New number is empty or no != new no" };
+                    return BadRequest(_response);
+                }
+
+                if (await _dbVillaNumber.GetAsync(u => u.VillaID == updateDTO.VillaID) == null)
+                {
+                    _logger.LogError("Create Villa number Error (Villa number has invalid foreign key)");
+                    _response.ErrorMessages = new List<string> { "Villa number has invalid foreign key" };
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
 
