@@ -25,8 +25,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ setIsRegistering }) => {
       <div>
         <input
           className={styles.input}
-          placeholder="Логин"
-          name="LoginField"
+          placeholder="Почта"
+          name="EmailField"
           type="text"
         />
       </div>

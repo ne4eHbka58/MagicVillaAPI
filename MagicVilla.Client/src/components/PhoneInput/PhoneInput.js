@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var jsx_runtime_1 = require("react/jsx-runtime");
 var react_1 = require("react");
 var PhoneInput = function (_a) {
-    var _b = _a.defaultValue, defaultValue = _b === void 0 ? "" : _b, onValueChange = _a.onValueChange, className = _a.className;
+    var _b = _a.defaultValue, defaultValue = _b === void 0 ? "" : _b, onValueChange = _a.onValueChange, onBlur = _a.onBlur, className = _a.className;
     var _c = (0, react_1.useState)(defaultValue), phoneValue = _c[0], setPhoneValue = _c[1];
     var inputRef = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(function () {
@@ -71,6 +71,6 @@ var PhoneInput = function (_a) {
         var formattedValue = formatPhoneNumber(pastedValue);
         setPhoneValue(formattedValue);
     };
-    return ((0, jsx_runtime_1.jsx)("input", { type: "tel", value: phoneValue, onChange: handleChange, onPaste: handlePaste, placeholder: "+7 (___) ___-__-__", ref: inputRef, className: className }));
+    return ((0, jsx_runtime_1.jsx)("input", { type: "tel", name: "phone", value: phoneValue, onBlur: onBlur, onChange: handleChange, onPaste: handlePaste, placeholder: "+7 (___) ___-__-__", ref: inputRef, className: className }));
 };
 exports.default = PhoneInput;

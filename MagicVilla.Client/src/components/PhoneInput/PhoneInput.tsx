@@ -3,12 +3,14 @@ import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 interface Props {
   defaultValue?: string;
   onValueChange?: (value: string) => void; // Callback для отслеживания изменений
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
   className?: string;
 }
 
 const PhoneInput: React.FC<Props> = ({
   defaultValue = "",
   onValueChange,
+  onBlur,
   className,
 }) => {
   const [phoneValue, setPhoneValue] = useState(defaultValue);
@@ -96,7 +98,9 @@ const PhoneInput: React.FC<Props> = ({
   return (
     <input
       type="tel"
+      name="phone"
       value={phoneValue}
+      onBlur={onBlur}
       onChange={handleChange}
       onPaste={handlePaste}
       placeholder="+7 (___) ___-__-__"
