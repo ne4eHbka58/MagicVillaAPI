@@ -1,0 +1,77 @@
+$text-color: #000;
+$button-background-color: #22be22;
+$hover-button-background-color: #1ca51c;
+$active-button-background-color: #188818;
+$registration-label-color: #1a0c4e;
+
+.form {
+  width: 400px;
+  height: 500px;
+  margin: 0 auto;
+  border: 3px solid black;
+  background-color: white;
+  opacity: 0.8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bigLabel {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 38px;
+}
+
+.input {
+  border: 0px;
+  background: none;
+  border-bottom: 1px solid $text-color;
+  color: $text-color;
+  width: 300px;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input::placeholder {
+  color: $text-color;
+  opacity: 1;
+}
+
+.label {
+  text-align: center;
+  font-size: 14px;
+}
+
+.registrationLabel {
+  text-decoration: underline;
+  color: $registration-label-color;
+  cursor: pointer;
+}
+
+.button {
+  display: block;
+  margin: 0 auto;
+  width: 230px;
+  height: 50px;
+  border-radius: 22px;
+  font-size: 20px;
+  margin-top: 100px;
+  margin-bottom: 40px;
+  background-color: $button-background-color;
+  color: $text-color;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: $hover-button-background-color;
+}
+
+.button:active {
+  background-color: $active-button-background-color;
+  transform: translateY(1px);
+}

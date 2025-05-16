@@ -1,7 +1,11 @@
 .form {
-  border-radius: 10px;
-  border: 5px solid;
+  width: 400px;
+  height: 500px;
+  margin: 0 auto;
+  border: 3px solid black;
+  background-color: white;
+  opacity: 0.8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.form .registration {
-  color: blue;
-}/*# sourceMappingURL=AuthorizationForm.module.css.map */

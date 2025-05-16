@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AuthorizationPage from "./pages/AuthorizationPage";
+import AuthorizationPage from "./pages/AuthPage/Authorization";
 
 const App = () => {
   return (
     <Router>
-      <div className="app">
+      <div>
         <main>
           <Routes>
             <Route path="/" element={<AuthorizationPage />} />

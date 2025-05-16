@@ -1,18 +1,30 @@
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, useRef, useState, useEffect } from "react";
 import styles from "./AuthorizationForm.module.css";
+import LoginForm from "../LoginForm/LoginForm";
+import RegistrationForm from "../RegistrationForm/RegistrationForm";
 
 const AuthorizationForm = () => {
+  const [isRegistering, setIsRegistering] = useState(false);
+
+  useEffect(() => {
+    console.log(isRegistering);
+  }, []);
+
+  const handleToggleForm = () => {
+    setIsRegistering(!isRegistering);
+  };
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+
   return (
     <div>
-      <form className={styles.form}>
-        <h2>Войти</h2>
-        <input placeholder="Введите логин" />
-        <br />
-        <input placeholder="Введите пароль" />
-        <br />
-        <button>Войти</button>
-        <h5 className={styles.registration}>Зарегистрироваться</h5>
-      </form>
+      {isRegistering ? (
+        <RegistrationForm setIsRegistering={setIsRegistering} />
+      ) : (
+        <LoginForm setIsRegistering={setIsRegistering} />
+      )}
     </div>
   );
 };
