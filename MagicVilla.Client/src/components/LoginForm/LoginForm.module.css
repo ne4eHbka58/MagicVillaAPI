@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .form {
   width: 400px;
   height: 500px;
@@ -43,6 +44,13 @@
 .label {
   text-align: center;
   font-size: 14px;
+}
+
+.error {
+  margin-top: -30px;
+  margin-left: -20px;
+  position: absolute; /* Добавляем абсолютное позиционирование */
+  color: red;
 }
 
 .registrationLabel {

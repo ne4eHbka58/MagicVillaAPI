@@ -1,16 +1,88 @@
 import React, { forwardRef, useRef, useState } from "react";
 import styles from "./LoginForm.module.css";
+import { fetchHashPassword, fetchUser } from "../../utils/users/users";
+import { validateString } from "../../utils/checkValidity/checkValidity";
 
 interface LoginFormProps {
   setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface FormData {
+  email: string;
+  password: string;
+}
+
 const LoginForm: React.FC<LoginFormProps> = ({ setIsRegistering }) => {
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const [formData, setFormData] = useState<FormData>({
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState<{
+    email: string;
+    password: string;
+  }>({
+    email: "",
+    password: "",
+  });
+
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleSingInClick = (event: React.MouseEvent<HTMLButtonElement>) => {};
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    let isValid = true;
+    const newErrors: {
+      email: string;
+      password: string;
+    } = {
+      email: "",
+      password: "",
+    }; // объект с текстом ошибок
+
+    // Валидация почты
+    const emailValidation = validateString(formData.email, {
+      required: true,
+      pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$/,
+      minLength: 3,
+      maxLength: 50,
+    });
+    if (!emailValidation.isValid) {
+      newErrors.email = emailValidation.errorMessage;
+      isValid = false;
+    }
+
+    // Валидация пароля
+    const passwordValidation = validateString(formData.password, {
+      required: true,
+      minLength: 3,
+      maxLength: 30,
+    });
+    if (!passwordValidation.isValid) {
+      newErrors.password = passwordValidation.errorMessage;
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    if (isValid) {
+      const newPassword = await fetchHashPassword(formData.password);
+
+      const userResponse = await fetchUser(formData.email);
+
+      if (userResponse.isSuccess && userResponse.result) {
+        if (userResponse.result.password === newPassword) {
+          console.log("Успех!");
+        } else {
+          console.log("Пароль неверный!");
+        }
+      } else {
+        console.log("Пользователь не найден или ошибка");
+      }
+    }
+  };
 
   const handleRegistrationClick = (
     event: React.MouseEvent<HTMLAnchorElement>
@@ -26,23 +98,25 @@ const LoginForm: React.FC<LoginFormProps> = ({ setIsRegistering }) => {
         <input
           className={styles.input}
           placeholder="Почта"
-          name="EmailField"
+          name="email"
           type="text"
+          onBlur={handleBlur}
         />
+        {errors.email && <div className={styles.error}>{errors.email}</div>}
       </div>
       <div>
         <input
           className={styles.input}
           placeholder="Пароль"
-          name="PasswordField"
+          name="password"
           type="password"
+          onBlur={handleBlur}
         />
+        {errors.password && (
+          <div className={styles.error}>{errors.password}</div>
+        )}
       </div>
-      <button
-        className={styles.button}
-        onClick={handleSingInClick}
-        type="submit"
-      >
+      <button className={styles.button} type="submit">
         Войти
       </button>
       <p className={styles.label}>

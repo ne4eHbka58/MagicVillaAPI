@@ -6,10 +6,6 @@ import RegistrationForm from "../RegistrationForm/RegistrationForm";
 const AuthorizationForm = () => {
   const [isRegistering, setIsRegistering] = useState(false);
 
-  useEffect(() => {
-    console.log(isRegistering);
-  }, []);
-
   const handleToggleForm = () => {
     setIsRegistering(!isRegistering);
   };

@@ -1,7 +1,11 @@
 import React, { forwardRef, useRef, useState } from "react";
 import styles from "./RegistrationForm.module.css";
 import PhoneInput from "../PhoneInput/PhoneInput";
-import { validateString, validatePasswords } from "../../utils/checkValidity";
+import {
+  validateString,
+  validatePasswords,
+} from "../../utils/checkValidity/checkValidity";
+import { createUser } from "../../utils/users/users";
 
 interface RegistrationFormProps {
   setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>;
@@ -48,9 +52,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     setFormData({ ...formData, [name]: value });
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(formData);
     let isValid = true;
     const newErrors: {
       surname: string;
@@ -103,9 +106,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     // Валидация почты
     const emailValidation = validateString(formData.email, {
       required: true,
-      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$/,
       minLength: 3,
-      maxLength: 30,
+      maxLength: 50,
     });
     if (!emailValidation.isValid) {
       newErrors.email = emailValidation.errorMessage;
@@ -136,13 +139,17 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     setErrors(newErrors);
 
     if (isValid) {
-      console.log("Form Data:", formData);
+      const newUser = {
+        email: formData.email,
+        password: formData.password,
+        surname: formData.surname,
+        name: formData.name,
+        phoneNumber: formData.phone,
+      };
+
+      await createUser(newUser);
     }
   };
-
-  const handleRegisterClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {};
 
   const handleSignInClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -210,11 +217,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           <div className={styles.error}>{errors.confirmPassword}</div>
         )}
       </div>
-      <button
-        className={styles.button}
-        onClick={handleRegisterClick}
-        type="submit"
-      >
+      <button className={styles.button} type="submit">
         Зарегистрироваться
       </button>
       <p className={styles.label}>

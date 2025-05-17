@@ -46,6 +46,13 @@ $registration-label-color: #1a0c4e;
   font-size: 14px;
 }
 
+.error {
+  margin-top: -30px;
+  margin-left: -20px;
+  position: absolute; /* Добавляем абсолютное позиционирование */
+  color: red;
+}
+
 .registrationLabel {
   text-decoration: underline;
   color: $registration-label-color;

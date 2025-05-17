@@ -1,25 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var jsx_runtime_1 = require("react/jsx-runtime");
-var react_1 = require("react");
-var PhoneInput = function (_a) {
-    var _b = _a.defaultValue, defaultValue = _b === void 0 ? "" : _b, onValueChange = _a.onValueChange, onBlur = _a.onBlur, className = _a.className;
-    var _c = (0, react_1.useState)(defaultValue), phoneValue = _c[0], setPhoneValue = _c[1];
-    var inputRef = (0, react_1.useRef)(null);
-    (0, react_1.useEffect)(function () {
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("react");
+const PhoneInput = ({ defaultValue = "", onValueChange, onBlur, className, }) => {
+    const [phoneValue, setPhoneValue] = (0, react_1.useState)(defaultValue);
+    const inputRef = (0, react_1.useRef)(null);
+    (0, react_1.useEffect)(() => {
         // Синхронизация значения defaultValue при изменении пропса defaultValue
         if (defaultValue !== phoneValue) {
             setPhoneValue(formatPhoneNumber(defaultValue));
         }
     }, [defaultValue]);
-    (0, react_1.useEffect)(function () {
+    (0, react_1.useEffect)(() => {
         if (onValueChange) {
             onValueChange(phoneValue); // Уведомляем родительский компонент об изменениях
         }
     }, [phoneValue, onValueChange]);
-    var formatPhoneNumber = function (value) {
-        var cleanedValue = value.replace(/\D/g, ""); // Удаляем все нецифровые символы
-        var formattedValue = "";
+    const formatPhoneNumber = (value) => {
+        const cleanedValue = value.replace(/\D/g, ""); // Удаляем все нецифровые символы
+        let formattedValue = "";
         if (cleanedValue.length > 0) {
             formattedValue = "+7 ";
             if (cleanedValue.length > 1) {
@@ -60,15 +59,15 @@ var PhoneInput = function (_a) {
         }
         return formattedValue;
     };
-    var handleChange = function (event) {
-        var inputValue = event.target.value;
-        var formattedValue = formatPhoneNumber(inputValue);
+    const handleChange = (event) => {
+        const inputValue = event.target.value;
+        const formattedValue = formatPhoneNumber(inputValue);
         setPhoneValue(formattedValue);
     };
-    var handlePaste = function (event) {
+    const handlePaste = (event) => {
         event.preventDefault();
-        var pastedValue = event.clipboardData.getData("text");
-        var formattedValue = formatPhoneNumber(pastedValue);
+        const pastedValue = event.clipboardData.getData("text");
+        const formattedValue = formatPhoneNumber(pastedValue);
         setPhoneValue(formattedValue);
     };
     return ((0, jsx_runtime_1.jsx)("input", { type: "tel", name: "phone", value: phoneValue, onBlur: onBlur, onChange: handleChange, onPaste: handlePaste, placeholder: "+7 (___) ___-__-__", ref: inputRef, className: className }));
