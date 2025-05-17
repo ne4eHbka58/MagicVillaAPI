@@ -1,16 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace MagicVilla_VillaAPI.Models
+namespace MagicVilla_VillaAPI.Models.Dto
 {
-    public class User
+    public class UserDTO
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Required]
+        [MaxLength(50)]
         public string Email { get; set; }
+        [Required]
+        [MaxLength(40)]
         public string Password { get; set; }
+        [Required]
+        [MaxLength(30)]
         public string Surname { get; set; }
+        [Required]
+        [MaxLength(30)]
         public string Name { get; set; }
+        [Required]
+        [MaxLength(30)]
         public string PhoneNumber { get; set; }
 
     }
