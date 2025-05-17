@@ -7,7 +7,8 @@ exports.createUser = exports.fetchHashPassword = exports.fetchUser = exports.fet
 const ky_1 = __importDefault(require("ky"));
 const fetchUsers = async () => {
     try {
-        const { result } = await ky_1.default.get("https://localhost:7116/api/UserAPI").json();
+        const response = await ky_1.default.get("https://localhost:7116/api/UserAPI").json();
+        return response;
     }
     catch (e) {
         console.log(e);
@@ -55,6 +56,7 @@ const fetchHashPassword = async (password) => {
 };
 exports.fetchHashPassword = fetchHashPassword;
 const createUser = async (userData) => {
+    var _a;
     try {
         const response = await ky_1.default
             .post("https://localhost:7116/api/UserAPI", {
@@ -65,7 +67,7 @@ const createUser = async (userData) => {
     }
     catch (error) {
         return {
-            statusCode: 500,
+            statusCode: ((_a = error.response) === null || _a === void 0 ? void 0 : _a.status) || 500,
             isSuccess: false,
             errorMessages: error,
             result: null,

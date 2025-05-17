@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AuthorizationPage from "./pages/AuthPage/Authorization";
+import VillasPage from "./pages/VillasPage/VillasPage";
 
 const App = () => {
   return (
@@ -8,7 +9,8 @@ const App = () => {
       <div>
         <main>
           <Routes>
-            <Route path="/" element={<AuthorizationPage />} />
+            <Route path="/auth" element={<AuthorizationPage />} />
+            <Route path="/" element={<VillasPage />} />
           </Routes>
         </main>
       </div>

@@ -1,0 +1,57 @@
+$main-text-color: #000;
+$accent-text-color: #2280cc;
+$main-bg-color: #f8f8f8;
+
+.villaCard {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding: 20px 15px;
+  gap: 20px;
+  background-color: $main-bg-color;
+  border-radius: 5px;
+
+  .img {
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+  }
+
+  .name {
+    color: $accent-text-color;
+    margin-block: 10px;
+  }
+
+  .description {
+    margin-block: 10px;
+    color: $main-text-color;
+  }
+
+  .infoBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+
+    .sup {
+      font-size: 0.7em; /* Или другой подходящий размер */
+      vertical-align: super; /* Или top, если нужно больше контроля */
+      position: relative;
+      top: -0.4em; /* Отрегулируйте смещение */
+    }
+  }
+
+  .info {
+    margin-block: 10px;
+    color: $accent-text-color;
+    font-weight: 500;
+  }
+
+  .price {
+    position: absolute;
+    bottom: 0;
+    right: 3%;
+    font-size: 24px;
+    color: $accent-text-color;
+  }
+}

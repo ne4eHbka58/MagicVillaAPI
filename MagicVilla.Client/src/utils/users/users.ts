@@ -16,11 +16,12 @@ interface APIResponse {
 
 export const fetchUsers = async () => {
   try {
-    const { result } = await ky.get("https://localhost:7116/api/UserAPI").json<{
+    const response = await ky.get("https://localhost:7116/api/UserAPI").json<{
       statusCode: number;
       isSuccess: boolean;
       result: User[];
     }>();
+    return response;
   } catch (e: any) {
     console.log(e);
   }
@@ -82,7 +83,7 @@ export const createUser = async (userData: User): Promise<APIResponse> => {
     return response;
   } catch (error: any) {
     return {
-      statusCode: 500,
+      statusCode: error.response?.status || 500,
       isSuccess: false,
       errorMessages: error,
       result: null,
