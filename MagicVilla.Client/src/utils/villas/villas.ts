@@ -36,8 +36,6 @@ export const fetchVillas = async () => {
       result: Villa[];
     }>();
 
-    console.log(response);
-
     return response;
   } catch (e: any) {
     console.log(e);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./VillasList.module.css";
 import VillaCard from "../VillaCard/VillaCard";
 import { fetchVillas } from "../../utils/villas/villas";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Villa {
   id: number;
@@ -23,10 +24,8 @@ const VillasList = () => {
     const loadVillas = async () => {
       try {
         const response = await fetchVillas();
-        console.log("Полные данные с API:", JSON.stringify(response, null, 2));
 
         if (response?.result) {
-          console.log("Первая вилла в массиве:", response.result[0]);
           setVillas(response.result);
         }
       } catch (e) {
@@ -38,8 +37,6 @@ const VillasList = () => {
     };
 
     loadVillas();
-
-    console.log(villas);
   }, []);
 
   if (loading) {

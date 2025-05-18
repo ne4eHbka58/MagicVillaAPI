@@ -2,6 +2,7 @@ import React, { forwardRef, useRef, useState } from "react";
 import styles from "./LoginForm.module.css";
 import { fetchHashPassword, fetchUser } from "../../utils/users/users";
 import { validateString } from "../../utils/checkValidity/checkValidity";
+import { useNavigate } from "react-router-dom";
 
 interface LoginFormProps {
   setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +14,8 @@ interface FormData {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ setIsRegistering }) => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
@@ -65,8 +68,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ setIsRegistering }) => {
       isValid = false;
     }
 
-    setErrors(newErrors);
-
     if (isValid) {
       const newPassword = await fetchHashPassword(formData.password);
 
@@ -74,13 +75,26 @@ const LoginForm: React.FC<LoginFormProps> = ({ setIsRegistering }) => {
 
       if (userResponse.isSuccess && userResponse.result) {
         if (userResponse.result.password === newPassword) {
-          console.log("Успех!");
+          navigate("/", {
+            state: {
+              user: {
+                name: userResponse.result.name,
+                surname: userResponse.result.surname,
+                email: userResponse.result.email,
+                phoneNumber: userResponse.result.phoneNumber,
+              },
+            },
+          });
+          console.log("Успешный вход");
         } else {
           console.log("Пароль неверный!");
+          newErrors.password = "Пароль не верный";
         }
       } else {
+        newErrors.email = "Пользователь не найден";
         console.log("Пользователь не найден или ошибка");
       }
+      setErrors(newErrors);
     }
   };
 

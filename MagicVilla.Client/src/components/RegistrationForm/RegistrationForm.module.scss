@@ -1,8 +1,4 @@
-$text-color: #000;
-$button-background-color: #22be22;
-$hover-button-background-color: #1ca51c;
-$active-button-background-color: #188818;
-$registration-label-color: #1a0c4e;
+@import "../../scss/variables";
 
 .form {
   width: 400px;
@@ -67,17 +63,17 @@ $registration-label-color: #1a0c4e;
   border-radius: 22px;
   font-size: 20px;
   margin-bottom: 20px;
-  background-color: $button-background-color;
+  background-color: $reg-button-background-color;
   color: $text-color;
   border: none;
   cursor: pointer;
 }
 
 .button:hover {
-  background-color: $hover-button-background-color;
+  background-color: $reg-hover-button-background-color;
 }
 
 .button:active {
-  background-color: $active-button-background-color;
+  background-color: $reg-active-button-background-color;
   transform: translateY(1px);
 }

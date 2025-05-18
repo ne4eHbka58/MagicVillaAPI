@@ -3,8 +3,8 @@ import styles from "./AuthorizationForm.module.css";
 import LoginForm from "../LoginForm/LoginForm";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 
-const AuthorizationForm = () => {
-  const [isRegistering, setIsRegistering] = useState(false);
+const AuthorizationForm = ({ register }: { register: boolean }) => {
+  const [isRegistering, setIsRegistering] = useState(register);
 
   const handleToggleForm = () => {
     setIsRegistering(!isRegistering);

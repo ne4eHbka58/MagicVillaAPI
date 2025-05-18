@@ -7,8 +7,8 @@ const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("react");
 const LoginForm_1 = __importDefault(require("../LoginForm/LoginForm"));
 const RegistrationForm_1 = __importDefault(require("../RegistrationForm/RegistrationForm"));
-const AuthorizationForm = () => {
-    const [isRegistering, setIsRegistering] = (0, react_1.useState)(false);
+const AuthorizationForm = ({ register }) => {
+    const [isRegistering, setIsRegistering] = (0, react_1.useState)(register);
     const handleToggleForm = () => {
         setIsRegistering(!isRegistering);
     };

@@ -9,7 +9,9 @@ const RegistrationForm_module_css_1 = __importDefault(require("./RegistrationFor
 const PhoneInput_1 = __importDefault(require("../PhoneInput/PhoneInput"));
 const checkValidity_1 = require("../../utils/checkValidity/checkValidity");
 const users_1 = require("../../utils/users/users");
+const react_router_dom_1 = require("react-router-dom");
 const RegistrationForm = ({ setIsRegistering, }) => {
+    const navigate = (0, react_router_dom_1.useNavigate)();
     const [formData, setFormData] = (0, react_1.useState)({
         surname: "",
         name: "",
@@ -107,6 +109,16 @@ const RegistrationForm = ({ setIsRegistering, }) => {
                 phoneNumber: formData.phone,
             };
             await (0, users_1.createUser)(newUser);
+            navigate("/", {
+                state: {
+                    user: {
+                        name: newUser.name,
+                        surname: newUser.surname,
+                        email: newUser.email,
+                        phoneNumber: newUser.phoneNumber,
+                    },
+                },
+            });
         }
     };
     const handleSignInClick = (event) => {

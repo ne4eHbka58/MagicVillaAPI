@@ -6,6 +6,7 @@ import {
   validatePasswords,
 } from "../../utils/checkValidity/checkValidity";
 import { createUser } from "../../utils/users/users";
+import { useNavigate } from "react-router-dom";
 
 interface RegistrationFormProps {
   setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,6 +24,8 @@ interface FormData {
 const RegistrationForm: React.FC<RegistrationFormProps> = ({
   setIsRegistering,
 }) => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<FormData>({
     surname: "",
     name: "",
@@ -148,6 +151,17 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
       };
 
       await createUser(newUser);
+
+      navigate("/", {
+        state: {
+          user: {
+            name: newUser.name,
+            surname: newUser.surname,
+            email: newUser.email,
+            phoneNumber: newUser.phoneNumber,
+          },
+        },
+      });
     }
   };
 

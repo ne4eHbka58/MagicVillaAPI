@@ -16,9 +16,7 @@ const VillasList = () => {
         const loadVillas = async () => {
             try {
                 const response = await (0, villas_1.fetchVillas)();
-                console.log("Полные данные с API:", JSON.stringify(response, null, 2));
                 if (response === null || response === void 0 ? void 0 : response.result) {
-                    console.log("Первая вилла в массиве:", response.result[0]);
                     setVillas(response.result);
                 }
             }
@@ -31,7 +29,6 @@ const VillasList = () => {
             }
         };
         loadVillas();
-        console.log(villas);
     }, []);
     if (loading) {
         return (0, jsx_runtime_1.jsx)("div", { className: VillasList_module_css_1.default.loading, children: "Loading..." });

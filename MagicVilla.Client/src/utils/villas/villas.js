@@ -8,7 +8,6 @@ const ky_1 = __importDefault(require("ky"));
 const fetchVillas = async () => {
     try {
         const response = await ky_1.default.get("https://localhost:7116/api/VillaAPI").json();
-        console.log(response);
         return response;
     }
     catch (e) {

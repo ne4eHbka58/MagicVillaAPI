@@ -8,7 +8,9 @@ const react_1 = require("react");
 const LoginForm_module_css_1 = __importDefault(require("./LoginForm.module.css"));
 const users_1 = require("../../utils/users/users");
 const checkValidity_1 = require("../../utils/checkValidity/checkValidity");
+const react_router_dom_1 = require("react-router-dom");
 const LoginForm = ({ setIsRegistering }) => {
+    const navigate = (0, react_router_dom_1.useNavigate)();
     const [formData, setFormData] = (0, react_1.useState)({
         email: "",
         password: "",
@@ -49,21 +51,33 @@ const LoginForm = ({ setIsRegistering }) => {
             newErrors.password = passwordValidation.errorMessage;
             isValid = false;
         }
-        setErrors(newErrors);
         if (isValid) {
             const newPassword = await (0, users_1.fetchHashPassword)(formData.password);
             const userResponse = await (0, users_1.fetchUser)(formData.email);
             if (userResponse.isSuccess && userResponse.result) {
                 if (userResponse.result.password === newPassword) {
-                    console.log("Успех!");
+                    navigate("/", {
+                        state: {
+                            user: {
+                                name: userResponse.result.name,
+                                surname: userResponse.result.surname,
+                                email: userResponse.result.email,
+                                phoneNumber: userResponse.result.phoneNumber,
+                            },
+                        },
+                    });
+                    console.log("Успешный вход");
                 }
                 else {
                     console.log("Пароль неверный!");
+                    newErrors.password = "Пароль не верный";
                 }
             }
             else {
+                newErrors.email = "Пользователь не найден";
                 console.log("Пользователь не найден или ошибка");
             }
+            setErrors(newErrors);
         }
     };
     const handleRegistrationClick = (event) => {
