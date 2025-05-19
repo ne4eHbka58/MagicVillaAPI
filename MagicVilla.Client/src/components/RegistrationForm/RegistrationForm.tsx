@@ -7,6 +7,7 @@ import {
 } from "../../utils/checkValidity/checkValidity";
 import { createUser } from "../../utils/users/users";
 import { useNavigate } from "react-router-dom";
+import { saveUserToLocalStorage } from "../../utils/localStorage/usersToLS";
 
 interface RegistrationFormProps {
   setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>;
@@ -152,16 +153,16 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
 
       await createUser(newUser);
 
-      navigate("/", {
-        state: {
-          user: {
-            name: newUser.name,
-            surname: newUser.surname,
-            email: newUser.email,
-            phoneNumber: newUser.phoneNumber,
-          },
-        },
-      });
+      const user = {
+        name: newUser.name,
+        surname: newUser.surname,
+        email: newUser.email,
+        phoneNumber: newUser.phoneNumber,
+      };
+
+      saveUserToLocalStorage(user);
+
+      navigate("/");
     }
   };
 

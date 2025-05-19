@@ -9,6 +9,7 @@ const LoginForm_module_css_1 = __importDefault(require("./LoginForm.module.css")
 const users_1 = require("../../utils/users/users");
 const checkValidity_1 = require("../../utils/checkValidity/checkValidity");
 const react_router_dom_1 = require("react-router-dom");
+const usersToLS_1 = require("../../utils/localStorage/usersToLS");
 const LoginForm = ({ setIsRegistering }) => {
     const navigate = (0, react_router_dom_1.useNavigate)();
     const [formData, setFormData] = (0, react_1.useState)({
@@ -56,16 +57,15 @@ const LoginForm = ({ setIsRegistering }) => {
             const userResponse = await (0, users_1.fetchUser)(formData.email);
             if (userResponse.isSuccess && userResponse.result) {
                 if (userResponse.result.password === newPassword) {
-                    navigate("/", {
-                        state: {
-                            user: {
-                                name: userResponse.result.name,
-                                surname: userResponse.result.surname,
-                                email: userResponse.result.email,
-                                phoneNumber: userResponse.result.phoneNumber,
-                            },
-                        },
-                    });
+                    // Если пароль совпадает, то авторизируем пользователя
+                    const user = {
+                        name: userResponse.result.name,
+                        surname: userResponse.result.surname,
+                        email: userResponse.result.email,
+                        phoneNumber: userResponse.result.phoneNumber,
+                    };
+                    (0, usersToLS_1.saveUserToLocalStorage)(user);
+                    navigate("/");
                     console.log("Успешный вход");
                 }
                 else {

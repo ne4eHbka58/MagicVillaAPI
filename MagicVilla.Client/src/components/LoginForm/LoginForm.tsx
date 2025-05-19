@@ -3,6 +3,7 @@ import styles from "./LoginForm.module.css";
 import { fetchHashPassword, fetchUser } from "../../utils/users/users";
 import { validateString } from "../../utils/checkValidity/checkValidity";
 import { useNavigate } from "react-router-dom";
+import { saveUserToLocalStorage } from "../../utils/localStorage/usersToLS";
 
 interface LoginFormProps {
   setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>;
@@ -75,16 +76,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ setIsRegistering }) => {
 
       if (userResponse.isSuccess && userResponse.result) {
         if (userResponse.result.password === newPassword) {
-          navigate("/", {
-            state: {
-              user: {
-                name: userResponse.result.name,
-                surname: userResponse.result.surname,
-                email: userResponse.result.email,
-                phoneNumber: userResponse.result.phoneNumber,
-              },
-            },
-          });
+          // Если пароль совпадает, то авторизируем пользователя
+          const user = {
+            name: userResponse.result.name,
+            surname: userResponse.result.surname,
+            email: userResponse.result.email,
+            phoneNumber: userResponse.result.phoneNumber,
+          };
+          saveUserToLocalStorage(user);
+          navigate("/");
           console.log("Успешный вход");
         } else {
           console.log("Пароль неверный!");

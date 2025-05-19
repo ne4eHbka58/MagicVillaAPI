@@ -1,10 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { removeUserFromLocalStorage } from "../../utils/localStorage/usersToLS";
 
 const Header = ({ name, surname }: { name?: string; surname?: string }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLogout = () => {
+    removeUserFromLocalStorage();
+    navigate("/auth?mode=login"); // Перенаправляем на страницу входа
+  };
+
   return (
-    <div className={styles.header}>
+    <div className={styles.header} ref={dropdownRef}>
       <ul className={styles.headerList}>
         <li className={styles.headerElements}>
           <Link to="/" className={styles.logo}>
@@ -18,9 +44,22 @@ const Header = ({ name, surname }: { name?: string; surname?: string }) => {
           </Link>
         </li>
         {name !== undefined && surname !== undefined ? (
-          <li className={styles.headerElements}>
-            <span>{surname}</span>
-            <span>{name}</span>
+          <li className={styles.userMenu}>
+            <div
+              className={styles.user}
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              {surname} {name}
+            </div>
+            <div
+              className={`${styles.dropdown} ${
+                isDropdownOpen ? styles.open : ""
+              }`}
+            >
+              <button className={styles.dropdownItem} onClick={handleLogout}>
+                Выйти
+              </button>
+            </div>
           </li>
         ) : (
           <li className={styles.headerElements}>
