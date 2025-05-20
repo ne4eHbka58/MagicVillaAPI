@@ -10,10 +10,6 @@ const AuthorizationForm = ({ register }: { register: boolean }) => {
     setIsRegistering(!isRegistering);
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
-
   return (
     <div>
       {isRegistering ? (

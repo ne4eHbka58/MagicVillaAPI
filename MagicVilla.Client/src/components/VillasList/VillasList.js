@@ -31,13 +31,13 @@ const VillasList = () => {
         loadVillas();
     }, []);
     if (loading) {
-        return (0, jsx_runtime_1.jsx)("div", { className: VillasList_module_css_1.default.loading, children: "Loading..." });
+        return (0, jsx_runtime_1.jsx)("div", { children: "Loading..." });
     }
     if (error) {
-        return (0, jsx_runtime_1.jsx)("div", { className: VillasList_module_css_1.default.error, children: error });
+        return (0, jsx_runtime_1.jsx)("div", { children: error });
     }
     if (!villas.length) {
-        return (0, jsx_runtime_1.jsx)("div", { className: VillasList_module_css_1.default.empty, children: "No villas available" });
+        return (0, jsx_runtime_1.jsx)("div", { children: "No villas available" });
     }
     return ((0, jsx_runtime_1.jsx)("div", { className: VillasList_module_css_1.default.villasList, children: villas.map((villa) => ((0, jsx_runtime_1.jsx)(VillaCard_1.default, { name: villa.name, details: villa.details, rate: villa.rate, occupancy: villa.occupancy, sqft: villa.sqft, imageUrl: villa.imageUrl, amenity: villa.amenity }, villa.id))) }));
 };

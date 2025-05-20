@@ -40,15 +40,15 @@ const VillasList = () => {
   }, []);
 
   if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div className={styles.error}>{error}</div>;
+    return <div>{error}</div>;
   }
 
   if (!villas.length) {
-    return <div className={styles.empty}>No villas available</div>;
+    return <div>No villas available</div>;
   }
 
   return (

@@ -3,28 +3,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteVilla = exports.editVilla = exports.createVilla = exports.fetchVilla = exports.fetchVillas = void 0;
+exports.deleteVillaNumber = exports.editVillaNumber = exports.createVillaNumber = exports.fetchVillaNumber = exports.fetchVillasNumbers = void 0;
 const ky_1 = __importDefault(require("ky"));
-const fetchVillas = async () => {
+const fetchVillasNumbers = async () => {
     try {
-        const response = await ky_1.default.get("https://localhost:7116/api/VillaAPI").json();
+        const response = await ky_1.default
+            .get("https://localhost:7116/api/VillaNumberAPI")
+            .json();
         return response;
     }
     catch (e) {
         console.log(e);
     }
 };
-exports.fetchVillas = fetchVillas;
-const fetchVilla = async (id) => {
+exports.fetchVillasNumbers = fetchVillasNumbers;
+const fetchVillaNumber = async (villaNo) => {
     var _a;
     try {
-        const url = `https://localhost:7116/api/VillaAPI/${id}`;
+        const url = `https://localhost:7116/api/VillaNumberAPI/${villaNo}`;
         const response = await ky_1.default.get(url);
         const data = await response.json();
         return data;
     }
     catch (error) {
-        // Неизвестная ошибка
         return {
             statusCode: ((_a = error.response) === null || _a === void 0 ? void 0 : _a.status) || 500,
             isSuccess: false,
@@ -33,12 +34,12 @@ const fetchVilla = async (id) => {
         };
     }
 };
-exports.fetchVilla = fetchVilla;
-const createVilla = async (villaData) => {
+exports.fetchVillaNumber = fetchVillaNumber;
+const createVillaNumber = async (villaData) => {
     var _a;
     try {
         const response = await ky_1.default
-            .post("https://localhost:7116/api/VillaAPI", {
+            .post("https://localhost:7116/api/VillaNumberAPI", {
             json: villaData,
         })
             .json();
@@ -53,12 +54,12 @@ const createVilla = async (villaData) => {
         };
     }
 };
-exports.createVilla = createVilla;
-const editVilla = async (villaData) => {
+exports.createVillaNumber = createVillaNumber;
+const editVillaNumber = async (villaData) => {
     var _a;
     try {
         const response = await ky_1.default
-            .put(`https://localhost:7116/api/VillaAPI/${villaData.id}`, {
+            .put(`https://localhost:7116/api/VillaNumberAPI/${villaData.villaNo}`, {
             json: villaData,
         })
             .json();
@@ -73,12 +74,12 @@ const editVilla = async (villaData) => {
         };
     }
 };
-exports.editVilla = editVilla;
-const deleteVilla = async (id) => {
+exports.editVillaNumber = editVillaNumber;
+const deleteVillaNumber = async (villaNo) => {
     var _a;
     try {
         const response = await ky_1.default
-            .delete(`https://localhost:7116/api/VillaAPI/${id}`, {})
+            .delete(`https://localhost:7116/api/VillaNumberAPI/${villaNo}`, {})
             .json();
         return response;
     }
@@ -91,4 +92,4 @@ const deleteVilla = async (id) => {
         };
     }
 };
-exports.deleteVilla = deleteVilla;
+exports.deleteVillaNumber = deleteVillaNumber;

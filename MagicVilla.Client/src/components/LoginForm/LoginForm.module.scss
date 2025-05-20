@@ -1,8 +1,4 @@
-$text-color: #000;
-$button-background-color: #22be22;
-$hover-button-background-color: #1ca51c;
-$active-button-background-color: #188818;
-$registration-label-color: #1a0c4e;
+@import "../../scss/variables";
 
 .form {
   width: 400px;

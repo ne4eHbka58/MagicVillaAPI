@@ -12,9 +12,6 @@ const AuthorizationForm = ({ register }) => {
     const handleToggleForm = () => {
         setIsRegistering(!isRegistering);
     };
-    const onSubmit = (event) => {
-        event.preventDefault();
-    };
     return ((0, jsx_runtime_1.jsx)("div", { children: isRegistering ? ((0, jsx_runtime_1.jsx)(RegistrationForm_1.default, { setIsRegistering: setIsRegistering })) : ((0, jsx_runtime_1.jsx)(LoginForm_1.default, { setIsRegistering: setIsRegistering })) }));
 };
 exports.default = AuthorizationForm;

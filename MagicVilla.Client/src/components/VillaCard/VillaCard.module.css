@@ -15,7 +15,7 @@
      object-fit: cover;
 }
 .villaCard .name {
-  color: #2280cc;
+  color: #176fee;
   margin-block: 10px;
 }
 .villaCard .description {
@@ -36,7 +36,7 @@
 }
 .villaCard .info {
   margin-block: 10px;
-  color: #2280cc;
+  color: #176fee;
   font-weight: 500;
 }
 .villaCard .price {
@@ -44,5 +44,5 @@
   bottom: 0;
   right: 3%;
   font-size: 24px;
-  color: #2280cc;
+  color: #176fee;
 }

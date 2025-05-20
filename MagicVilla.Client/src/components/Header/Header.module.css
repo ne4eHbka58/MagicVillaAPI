@@ -11,7 +11,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  color: #2280cc;
+  color: #176fee;
   font-size: 28px;
   padding: 0;
   padding-block: 20px;
@@ -31,7 +31,7 @@
 
 .blueText {
   text-decoration: none;
-  color: #2280cc;
+  color: #176fee;
 }
 
 .headerElements {

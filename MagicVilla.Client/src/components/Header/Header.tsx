@@ -36,10 +36,10 @@ const Header = ({ name, surname }: { name?: string; surname?: string }) => {
           <Link to="/" className={styles.logo}>
             MagicVilla
           </Link>
-          <Link to="/" className={styles.grayText}>
+          <Link to="/villasApi" className={styles.grayText}>
             Виллы
           </Link>
-          <Link to="/" className={styles.grayText}>
+          <Link to="/villaNumberApi" className={styles.grayText}>
             Номера
           </Link>
         </li>

@@ -1,39 +1,26 @@
 import ky from "ky";
-interface Villa {
-  id: number;
-  name: string;
-  details?: string;
-  rate: number;
-  occupancy?: number;
-  sqft?: number;
-  imageUrl?: string;
-  amenity?: string;
-}
-
-interface VillaCreateDTO {
-  name: string;
-  details?: string;
-  rate: number;
-  occupancy?: number;
-  sqft?: number;
-  imageUrl?: string;
-  amenity?: string;
+interface VillaNumber {
+  villaNo: number;
+  villaID: number;
+  specialDetails?: string;
 }
 
 interface APIResponse {
   statusCode: number;
   isSuccess: boolean;
-  result: Villa | null;
+  result: VillaNumber | null;
   errorMessages?: string[];
 }
 
-export const fetchVillas = async () => {
+export const fetchVillasNumbers = async () => {
   try {
-    const response = await ky.get("https://localhost:7116/api/VillaAPI").json<{
-      statusCode: number;
-      isSuccess: boolean;
-      result: Villa[];
-    }>();
+    const response = await ky
+      .get("https://localhost:7116/api/VillaNumberAPI")
+      .json<{
+        statusCode: number;
+        isSuccess: boolean;
+        result: VillaNumber[];
+      }>();
 
     return response;
   } catch (e: any) {
@@ -41,9 +28,11 @@ export const fetchVillas = async () => {
   }
 };
 
-export const fetchVilla = async (id: number): Promise<APIResponse> => {
+export const fetchVillaNumber = async (
+  villaNo: number
+): Promise<APIResponse> => {
   try {
-    const url = `https://localhost:7116/api/VillaAPI/${id}`;
+    const url = `https://localhost:7116/api/VillaNumberAPI/${villaNo}`;
 
     const response = await ky.get(url);
 
@@ -51,7 +40,6 @@ export const fetchVilla = async (id: number): Promise<APIResponse> => {
 
     return data;
   } catch (error: any) {
-    // Неизвестная ошибка
     return {
       statusCode: error.response?.status || 500,
       isSuccess: false,
@@ -61,12 +49,12 @@ export const fetchVilla = async (id: number): Promise<APIResponse> => {
   }
 };
 
-export const createVilla = async (
-  villaData: VillaCreateDTO
+export const createVillaNumber = async (
+  villaData: VillaNumber
 ): Promise<APIResponse> => {
   try {
     const response = await ky
-      .post("https://localhost:7116/api/VillaAPI", {
+      .post("https://localhost:7116/api/VillaNumberAPI", {
         json: villaData,
       })
       .json<APIResponse>();
@@ -82,10 +70,12 @@ export const createVilla = async (
   }
 };
 
-export const editVilla = async (villaData: Villa): Promise<APIResponse> => {
+export const editVillaNumber = async (
+  villaData: VillaNumber
+): Promise<APIResponse> => {
   try {
     const response = await ky
-      .put(`https://localhost:7116/api/VillaAPI/${villaData.id}`, {
+      .put(`https://localhost:7116/api/VillaNumberAPI/${villaData.villaNo}`, {
         json: villaData,
       })
       .json<APIResponse>();
@@ -101,10 +91,12 @@ export const editVilla = async (villaData: Villa): Promise<APIResponse> => {
   }
 };
 
-export const deleteVilla = async (id: number): Promise<APIResponse> => {
+export const deleteVillaNumber = async (
+  villaNo: number
+): Promise<APIResponse> => {
   try {
     const response = await ky
-      .delete(`https://localhost:7116/api/VillaAPI/${id}`, {})
+      .delete(`https://localhost:7116/api/VillaNumberAPI/${villaNo}`, {})
       .json<APIResponse>();
 
     return response;
