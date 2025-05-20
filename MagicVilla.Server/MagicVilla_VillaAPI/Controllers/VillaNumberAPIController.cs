@@ -117,10 +117,10 @@ namespace MagicVilla_VillaAPI.Controllers
                     return BadRequest(_response);
                 }
 
-                if (await _dbVillaNumber.GetAsync(u => u.VillaID == createDTO.VillaID) == null)
+                if (await _dbVilla.GetAsync(u => u.Id == createDTO.VillaID) == null)
                 {
                     _logger.LogError("Create Villa number Error (Villa number has invalid foreign key)");
-                    _response.ErrorMessages = new List<string> { "Villa number has invalid foreign key" };
+                    _response.ErrorMessages = new List<string> { "Villa number has invalid foreign key " + createDTO.VillaID};
                     _response.IsSuccess = false;
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
@@ -222,7 +222,7 @@ namespace MagicVilla_VillaAPI.Controllers
                     return BadRequest(_response);
                 }
 
-                if (await _dbVillaNumber.GetAsync(u => u.VillaID == updateDTO.VillaID) == null)
+                if (await _dbVilla.GetAsync(u => u.Id == updateDTO.VillaID) == null)
                 {
                     _logger.LogError("Create Villa number Error (Villa number has invalid foreign key)");
                     _response.ErrorMessages = new List<string> { "Villa number has invalid foreign key" };
