@@ -1,0 +1,79 @@
+@import "../../scss/variables";
+
+.form {
+  width: 400px;
+  height: 650px;
+  margin: 0 auto;
+  border: 3px solid black;
+  background-color: white;
+  opacity: 0.8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bigLabel {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 34px;
+}
+
+.input {
+  border: 0px;
+  background: none;
+  border-bottom: 1px solid $text-color;
+  color: $text-color;
+  width: 300px;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input::placeholder {
+  color: $text-color;
+  opacity: 1;
+}
+
+.error {
+  margin-top: -35px;
+  margin-left: -20px;
+  position: absolute; /* Добавляем абсолютное позиционирование */
+  color: red;
+}
+
+.label {
+  text-align: center;
+  font-size: 14px;
+}
+
+.registrationLabel {
+  text-decoration: underline;
+  color: $registration-label-color;
+  cursor: pointer;
+}
+
+.button {
+  display: block;
+  margin: 0 auto;
+  width: 230px;
+  height: 50px;
+  border-radius: 22px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  background-color: $reg-button-background-color;
+  color: $text-color;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: $reg-hover-button-background-color;
+}
+
+.button:active {
+  background-color: $reg-active-button-background-color;
+  transform: translateY(1px);
+}

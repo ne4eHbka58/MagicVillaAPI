@@ -22,6 +22,32 @@ namespace MagicVilla_VillaAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("MagicVilla_VillaAPI.Models.User", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("MagicVilla_VillaAPI.Models.Villa", b =>
                 {
                     b.Property<int>("Id")
@@ -70,7 +96,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 1,
                             Amenity = "",
-                            CreatedDate = new DateTime(2025, 5, 13, 21, 37, 42, 7, DateTimeKind.Local).AddTicks(1939),
+                            CreatedDate = new DateTime(2025, 5, 16, 20, 46, 58, 346, DateTimeKind.Local).AddTicks(1171),
                             Details = "Some text about this Royal beautiful Villa",
                             ImageUrl = "",
                             Name = "Royal Villa",
@@ -83,7 +109,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 2,
                             Amenity = "Pool",
-                            CreatedDate = new DateTime(2025, 5, 13, 21, 37, 42, 7, DateTimeKind.Local).AddTicks(1942),
+                            CreatedDate = new DateTime(2025, 5, 16, 20, 46, 58, 346, DateTimeKind.Local).AddTicks(1173),
                             Details = "Some details about this Pool Villa",
                             ImageUrl = "",
                             Name = "Pool Villa",
@@ -96,7 +122,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 3,
                             Amenity = "Access to the ocean",
-                            CreatedDate = new DateTime(2025, 5, 13, 21, 37, 42, 7, DateTimeKind.Local).AddTicks(1944),
+                            CreatedDate = new DateTime(2025, 5, 16, 20, 46, 58, 346, DateTimeKind.Local).AddTicks(1176),
                             Details = "Villa with access to the ocean",
                             ImageUrl = "",
                             Name = "Ocean Villa",
@@ -109,7 +135,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 4,
                             Amenity = "Near the beach",
-                            CreatedDate = new DateTime(2025, 5, 13, 21, 37, 42, 7, DateTimeKind.Local).AddTicks(1946),
+                            CreatedDate = new DateTime(2025, 5, 16, 20, 46, 58, 346, DateTimeKind.Local).AddTicks(1178),
                             Details = "Villa near the beach",
                             ImageUrl = "",
                             Name = "Beach Villa",
@@ -122,7 +148,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 5,
                             Amenity = "Royal pool",
-                            CreatedDate = new DateTime(2025, 5, 13, 21, 37, 42, 7, DateTimeKind.Local).AddTicks(1949),
+                            CreatedDate = new DateTime(2025, 5, 16, 20, 46, 58, 346, DateTimeKind.Local).AddTicks(1180),
                             Details = "Royal Villa with a big pool",
                             ImageUrl = "",
                             Name = "Royal Pool Villa",
@@ -161,7 +187,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         new
                         {
                             VillaNo = 501,
-                            CreatedDate = new DateTime(2025, 5, 13, 21, 37, 42, 7, DateTimeKind.Local).AddTicks(2202),
+                            CreatedDate = new DateTime(2025, 5, 16, 20, 46, 58, 346, DateTimeKind.Local).AddTicks(1286),
                             SpecialDetails = "Room with facilities for the disabled",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             VillaID = 5
@@ -169,7 +195,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         new
                         {
                             VillaNo = 502,
-                            CreatedDate = new DateTime(2025, 5, 13, 21, 37, 42, 7, DateTimeKind.Local).AddTicks(2204),
+                            CreatedDate = new DateTime(2025, 5, 16, 20, 46, 58, 346, DateTimeKind.Local).AddTicks(1288),
                             SpecialDetails = "Big room",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             VillaID = 5
@@ -177,7 +203,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         new
                         {
                             VillaNo = 503,
-                            CreatedDate = new DateTime(2025, 5, 13, 21, 37, 42, 7, DateTimeKind.Local).AddTicks(2206),
+                            CreatedDate = new DateTime(2025, 5, 16, 20, 46, 58, 346, DateTimeKind.Local).AddTicks(1289),
                             SpecialDetails = "Big bath",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             VillaID = 5
